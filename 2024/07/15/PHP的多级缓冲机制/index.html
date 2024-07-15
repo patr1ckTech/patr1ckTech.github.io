@@ -19,18 +19,26 @@
         <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2024/04/index.html">
+    <meta name="description" content="在 PHP 中，缓冲区（output buffering）是一种将输出数据暂存到内存中的技术。 它可以将脚本生成的所有输出数据保存在缓冲区中，直到缓冲区被显式地清空或者达到一定的大小限制时才会输出到客户端。  ob_clean — 清空（擦掉）输出缓冲区 ob_end_clean — 清空（擦除）缓冲区并关闭输出缓冲 ob_end_flush — 冲刷出（送出）输出缓冲区内容并关闭缓冲 ob_fl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP的多级缓冲机制">
+<meta property="og:url" content="http://example.com/2024/07/15/PHP%E7%9A%84%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%86%B2%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在 PHP 中，缓冲区（output buffering）是一种将输出数据暂存到内存中的技术。 它可以将脚本生成的所有输出数据保存在缓冲区中，直到缓冲区被显式地清空或者达到一定的大小限制时才会输出到客户端。  ob_clean — 清空（擦掉）输出缓冲区 ob_end_clean — 清空（擦除）缓冲区并关闭输出缓冲 ob_end_flush — 冲刷出（送出）输出缓冲区内容并关闭缓冲 ob_fl">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images1/ob1.png">
+<meta property="og:image" content="http://example.com/images1/ob2.png">
+<meta property="article:published_time" content="2024-07-15T08:54:16.000Z">
+<meta property="article:modified_time" content="2024-07-15T09:01:24.676Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="php">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images1/ob1.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
     
-    <title>Why are you still stuck</title>
+    <title>PHP的多级缓冲机制 · Why are you still stuck</title>
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -218,6 +226,8 @@
         }
     </script>
     
+        <body class="post-body">
+    
         <!-- header -->
         <header class="header header-mobile">
     <!-- top read progress line -->
@@ -247,6 +257,17 @@
     </div>
     <!-- toggle banner for post layout -->
     
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">My blog</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">PHP的多级缓冲机制</a>
+            </div>
+        </div>
+    
 </header>
 
         <!-- fixed footer -->
@@ -273,24 +294,76 @@
 
 
 
+    height:50vh;
+
 ">
     
     <!-- 主页  -->
     
+        
+    <!-- 404页  -->
+    
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/blog2.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+                PHP的多级缓冲机制
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+                
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="php">php</a>
+    
+</div>
+
+                
+                <!-- 文章字数统计 -->
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2024/07/15</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -420,48 +493,96 @@
 
             <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
             <div class="container container-unloaded">
-                <main class="main index-page">
-    
-        
-        
-        
-        
-            
-        
-        <article class="index-post">
-            <a class="abstract-title" href="/2024/04/07/%E8%AF%A6%E8%B0%88PHP%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">
-                
-                <span class="abstract-title-text">详谈PHP垃圾回收机制</span>
-            </a>
-            <div class="abstract-content">
-                
-            </div>
-            <!-- read more -->
-            
-            <div class="abstract-post-meta">
-                <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/04/28">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/04/07</span>
-                </div>
-                <!-- tags -->
-                
-                    <div class= abstract-tags >
-    
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="PHP">PHP</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="反序列化">反序列化</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="GC">GC</a>
-    
-</div>
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>在 PHP 中，缓冲区（output buffering）是一种将输出数据暂存到内存中的技术。 它可以将脚本生成的所有输出数据保存在缓冲区中，直到缓冲区被显式地清空或者达到一定的大小限制时才会输出到客户端。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-clean.php">ob_clean</a> — 清空（擦掉）输出缓冲区</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-end-clean.php">ob_end_clean</a> — 清空（擦除）缓冲区并关闭输出缓冲</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-end-flush.php">ob_end_flush</a> — 冲刷出（送出）输出缓冲区内容并关闭缓冲</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-flush.php">ob_flush</a> — 冲刷出（送出）输出缓冲区中的内容</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-start.php">ob_start</a> — 打开输出控制缓冲</li>
+</ul>
+<p>我们来段代码测试以下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); </span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;level 1&lt;br/&gt; &#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); </span><br><span class="line"><span class="keyword">echo</span>  <span class="string">&#x27;level 2&lt;br/&gt; &#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); </span><br><span class="line"><span class="keyword">echo</span>  <span class="string">&#x27;level 3&lt;br/&gt; &#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">ob_end_flush</span>();</span><br><span class="line"><span class="title function_ invoke__">ob_end_flush</span>();</span><br><span class="line"><span class="title function_ invoke__">ob_end_flush</span>();</span><br></pre></td></tr></table></figure>
+<p>结果如下，可以看到都正常输出了<br><img src="/images1/ob1.png"></p>
+<p>当程序修改一下，修改一个ob_end_flush() 变成 ob_end_clean() 成为以下这个，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); </span><br><span class="line"><span class="keyword">echo</span>   <span class="string">&#x27;level 1&lt;br/&gt; &#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); </span><br><span class="line"><span class="keyword">echo</span>   <span class="string">&#x27;level 2&lt;br/&gt; &#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); </span><br><span class="line"><span class="keyword">echo</span>   <span class="string">&#x27;level 3&lt;br/&gt; &#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">ob_end_clean</span>();<span class="comment">//修改处</span></span><br><span class="line"><span class="title function_ invoke__">ob_end_flush</span>();</span><br><span class="line"><span class="title function_ invoke__">ob_end_flush</span>();</span><br></pre></td></tr></table></figure>
+<p>结果如下,<br><img src="/images1/ob2.png"><br>可能你会认为ob_end_clean()会清除与他最近的ob_start()的输出;其实这个说法不是很全面，看下面的例子</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); </span><br><span class="line"><span class="keyword">echo</span>   <span class="string">&#x27;level 1&lt;br/&gt; &#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); </span><br><span class="line"><span class="keyword">echo</span>   <span class="string">&#x27;level 2&lt;br/&gt; &#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); </span><br><span class="line"><span class="keyword">echo</span>   <span class="string">&#x27;level 3&lt;br/&gt; &#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">ob_end_clean</span>(); <span class="comment">//第一次修改</span></span><br><span class="line"><span class="title function_ invoke__">ob_end_flush</span>();</span><br><span class="line"><span class="title function_ invoke__">ob_end_clean</span>(); <span class="comment">//第二次修改</span></span><br></pre></td></tr></table></figure>
+<p>这次什么输出都没有了<br>中间不是有一个ob_flush()吗？按理来说应该是输出  level2 的。</p>
+<p>其实造成这样的主要原因是输出的多级缓冲机制。这个程序例子有三个ob_start(),就意味着他有3个缓冲区A,B,C，而其实php程序本身也有一个最终输出的缓冲区，我们就把他叫做F。</p>
+<p>在这个程序中他这几个缓冲区是有一定层次的，C-&gt;B-&gt;A-&gt;F，F层次最高，是程序最终的输出缓冲，我们按上面的程序来进行讲解。下面是从上至下的顺序来的</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ob_start</span>();<span class="comment">//F:null </span></span><br><span class="line"><span class="comment">//然后新建缓冲区A。  A: null -&gt; F:null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span>   <span class="string">&#x27;level 1&lt;br/&gt; &#x27;</span>;<span class="comment">//此时程序有输出，输出进入最低的缓冲区A  A: &#x27;level 1&lt;br/&gt;&#x27; -&gt; F:null</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); <span class="comment">//新建缓冲区B 。 B:null  -&gt;  A: &#x27;level 1&lt;br/&gt;&#x27; -&gt; F:null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span>   <span class="string">&#x27;level 2&lt;br/&gt; &#x27;</span>;<span class="comment">//程序有输出，输出进入最低的缓冲区B     B:&#x27;level 2&lt;br/&gt; &#x27; -&gt;  A: &#x27;level 1&lt;br/&gt;&#x27; -&gt;F:null</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">ob_start</span>(); <span class="comment">//新建缓冲区C   C:null  B:&#x27;level 2&lt;br/&gt; &#x27;   A: &#x27;level 1&lt;br/&gt;&#x27; -&gt; F:null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span>   <span class="string">&#x27;level 3&lt;br/&gt; &#x27;</span>;<span class="comment">//程序有输出，输出进入最低的缓冲区C    C:&#x27;level 3&lt;br/&gt; &#x27;  -&gt;  B:&#x27;level 2&lt;br/&gt; &#x27;  -&gt;  A: &#x27;level 1&lt;br/&gt;&#x27; -&gt; F:null</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">ob_end_clean</span>(); <span class="comment">//缓冲区C被清空并关闭。  B:&#x27;level 2&lt;br/&gt; &#x27;  -&gt;  A: &#x27;level 1&lt;br/&gt;&#x27; -&gt; F:null</span></span><br><span class="line"><span class="title function_ invoke__">ob_end_flush</span>(); <span class="comment">//缓冲区B输出到上一级的缓冲区A并关闭。   A: &#x27;level 1&lt;br/&gt;level 2&lt;br/&gt; &#x27; -&gt; F:null</span></span><br><span class="line"><span class="title function_ invoke__">ob_end_clean</span>(); <span class="comment">//缓冲区A被清空并关闭。 此时缓冲区A的东西还没真正输出到最终的F中，因此也就整个程序也就没有任何的输出了。</span></span><br></pre></td></tr></table></figure>
+<p>也就是说，当我们多次建立新缓冲区，缓冲区们会根据建立先后去组成多级的缓冲区，每次接受输出的时候都相应的进入最低的(建立时间最晚)的缓冲区，<br>而到了最后面清空或者输出缓冲区，都是按照顺序从最低的那级缓冲区进行操作，flush就是输出至下一级缓冲区，clean就是讲当前处理的最低一块缓冲区的输出置为null，</p>
+<p>最后附上一些关于ob的函数操作</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.flush.php">flush</a> — 刷新输出缓冲</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-clean.php">ob_clean</a> — 清空（擦掉）输出缓冲区</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-end-clean.php">ob_end_clean</a> — 清空（擦除）缓冲区并关闭输出缓冲</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-end-flush.php">ob_end_flush</a> — 冲刷出（送出）输出缓冲区内容并关闭缓冲</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-flush.php">ob_flush</a> — 冲刷出（送出）输出缓冲区中的内容</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-get-clean.php">ob_get_clean</a> — 得到当前缓冲区的内容并删除当前输出缓。</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-get-contents.php">ob_get_contents</a> — 返回输出缓冲区的内容</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-get-flush.php">ob_get_flush</a> — 刷出（送出）缓冲区内容，以字符串形式返回内容，并关闭输出缓冲区。</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-get-length.php">ob_get_length</a> — 返回输出缓冲区内容的长度</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-get-level.php">ob_get_level</a> — 返回输出缓冲机制的嵌套级别</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-get-status.php">ob_get_status</a> — 得到所有输出缓冲区的状态</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-gzhandler.php">ob_gzhandler</a> — 在ob_start中使用的用来压缩输出缓冲区中内容的回调函数。ob_start callback function to gzip output buffer</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-implicit-flush.php">ob_implicit_flush</a> — 打开&#x2F;关闭绝对刷送</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-list-handlers.php">ob_list_handlers</a> — 列出所有使用中的输出处理程序。</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.ob-start.php">ob_start</a> — 打开输出控制缓冲</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.output-add-rewrite-var.php">output_add_rewrite_var</a> — 添加URL重写器的值（Add URL rewriter values）</li>
+<li><a target="_blank" rel="noopener" href="http://cn2.php.net/manual/zh/function.output-reset-rewrite-vars.php">output_reset_rewrite_vars</a> — 重设URL重写器的值（Reset URL rewriter values</li>
+</ul>
 
-                
-            </div>
-        </article>
-        <div class="index-post-divider"></div>
+    </article>
+    <!-- license -->
     
-    <!-- paginator  -->
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2024/04/07/%E8%AF%A6%E8%B0%88PHP%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" title="详谈PHP垃圾回收机制">
+                    <div class="prevTitle">详谈PHP垃圾回收机制</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
     
 </main>
 
@@ -557,6 +678,23 @@
 
         </div>
         <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                
+            </div>
         
         <!-- sidebar -->
         <div class="sidebar sidebar-hide">
@@ -717,6 +855,8 @@
         <!-- CNZZ -->
         
         <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
         
         <!-- mermaid -->
         
